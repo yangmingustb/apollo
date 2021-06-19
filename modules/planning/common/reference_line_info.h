@@ -293,13 +293,18 @@ class ReferenceLineInfo {
 
   PathDecision path_decision_;
 
+  // howt to do this 
   Obstacle* blocking_obstacle_;
 
+  // how to do this
   std::vector<PathBoundary> candidate_path_boundaries_;
   std::vector<PathData> candidate_path_data_;
 
+  // the final path, and this data is as next optimization which data? */
   PathData path_data_;
+  // the final fallback path
   PathData fallback_path_data_;
+  // the final speed 
   SpeedData speed_data_;
 
   DiscretizedTrajectory discretized_trajectory_;
@@ -331,6 +336,7 @@ class ReferenceLineInfo {
 
   ADCTrajectory::TrajectoryType trajectory_type_ = ADCTrajectory::UNKNOWN;
 
+  // scenerio overlaps
   /**
    * Overlaps encountered in the first time along the reference line in front of
    * the vehicle

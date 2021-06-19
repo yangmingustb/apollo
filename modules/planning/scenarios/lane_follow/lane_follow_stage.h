@@ -36,42 +36,46 @@
 #include "modules/planning/scenarios/stage.h"
 #include "modules/planning/tasks/task.h"
 
-namespace apollo {
-namespace planning {
-namespace scenario {
-namespace lane_follow {
+namespace apollo
+{
+namespace planning
+{
+namespace scenario
+{
+namespace lane_follow
+{
+class LaneFollowStage : public Stage
+{
+public:
+    LaneFollowStage(const ScenarioConfig::StageConfig& config,
+            const std::shared_ptr<DependencyInjector>& injector);
 
-class LaneFollowStage : public Stage {
- public:
-  LaneFollowStage(const ScenarioConfig::StageConfig& config,
-                  const std::shared_ptr<DependencyInjector>& injector);
+    StageStatus Process(const common::TrajectoryPoint& planning_init_point,
+            Frame* frame) override;
 
-  StageStatus Process(const common::TrajectoryPoint& planning_init_point,
-                      Frame* frame) override;
+    common::Status PlanOnReferenceLine(
+            const common::TrajectoryPoint& planning_start_point, Frame* frame,
+            ReferenceLineInfo* reference_line_info);
 
-  common::Status PlanOnReferenceLine(
-      const common::TrajectoryPoint& planning_start_point, Frame* frame,
-      ReferenceLineInfo* reference_line_info);
+    void PlanFallbackTrajectory(
+            const common::TrajectoryPoint& planning_start_point, Frame* frame,
+            ReferenceLineInfo* reference_line_info);
 
-  void PlanFallbackTrajectory(
-      const common::TrajectoryPoint& planning_start_point, Frame* frame,
-      ReferenceLineInfo* reference_line_info);
+    void GenerateFallbackPathProfile(
+            const ReferenceLineInfo* reference_line_info, PathData* path_data);
 
-  void GenerateFallbackPathProfile(const ReferenceLineInfo* reference_line_info,
-                                   PathData* path_data);
+    bool RetrieveLastFramePathProfile(
+            const ReferenceLineInfo* reference_line_info, const Frame* frame,
+            PathData* path_data);
 
-  bool RetrieveLastFramePathProfile(
-      const ReferenceLineInfo* reference_line_info, const Frame* frame,
-      PathData* path_data);
+    common::SLPoint GetStopSL(const ObjectStop& stop_decision,
+            const ReferenceLine& reference_line) const;
 
-  common::SLPoint GetStopSL(const ObjectStop& stop_decision,
-                            const ReferenceLine& reference_line) const;
+    void RecordObstacleDebugInfo(ReferenceLineInfo* reference_line_info);
 
-  void RecordObstacleDebugInfo(ReferenceLineInfo* reference_line_info);
-
- private:
-  ScenarioConfig config_;
-  std::unique_ptr<Stage> stage_;
+private:
+    ScenarioConfig config_;
+    std::unique_ptr<Stage> stage_;
 };
 
 }  // namespace lane_follow

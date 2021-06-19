@@ -54,7 +54,8 @@ namespace planning {
 /**
  * @class ReferenceLineProvider
  * @brief The class of ReferenceLineProvider.
- *        It provides smoothed reference line to planning.
+ *        It provides smoothed reference line to planning. and it is a stand
+ * alone process.
  */
 class ReferenceLineProvider {
  public:

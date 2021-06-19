@@ -139,7 +139,7 @@ class PathData {
    *
    */
   // wheter this PathData is a path reference serving as an optimization target
-  // for later modules
+  // for later modules, guide line
   bool is_valid_path_reference_ = false;
 
   /**

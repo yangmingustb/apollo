@@ -31,7 +31,7 @@ namespace apollo {
 namespace planning {
 
 /**
- * @class PathDecision
+ * @class PathDecision , when to update this deicision?
  *
  * @brief PathDecision represents all obstacle decisions on one path.
  */

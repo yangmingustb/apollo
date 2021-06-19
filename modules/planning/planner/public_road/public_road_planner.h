@@ -68,7 +68,7 @@ class PublicRoadPlanner : public PlannerWithReferenceLine {
   /**
    * @brief Override function Plan in parent class Planner.
    * @param planning_init_point The trajectory point where planning starts.
-   * @param frame Current planning frame.
+   * @param frame Current planning frame.  // 帧
    * @return OK if planning succeeds; error otherwise.
    */
   common::Status Plan(const common::TrajectoryPoint& planning_init_point,
